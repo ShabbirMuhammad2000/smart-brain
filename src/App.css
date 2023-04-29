@@ -1,38 +1,104 @@
 .App {
-  text-align: center;
+  position: relative;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.center {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 100%;
+  padding-top: 600px; /* add some padding to prevent overlap */
+  font-size: 1.2rem; /* default font size */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+
+.image-link-form input[type="text"] {
+  padding: 5px;
+  font-size: 0.8rem;
+}
+
+.image-link-form button {
+  padding: 5px;
+  font-size: 0.8rem;
+}
+
+
+.logo {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 5px;
+}
+
+.rank {
+  margin-top: 5px;
+  font-size: 1rem;
+}
+
+.navigation {
+  height: 50px;
+}
+
+.navigation ul {
+  font-size: 0.8rem;
+}
+
+.particles-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  height: 100%;
+}
+ 
+
+
+@media only screen and (max-width: 600px) {
+  .content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+    padding-top: 600px; /* add some padding to prevent overlap */
+    font-size: 1.2rem; /* default font size */
   }
-  to {
-    transform: rotate(360deg);
+
+  .navigation {
+    height: 50px;
+  }
+  
+  .navigation ul {
+    font-size: 0.8rem;
+  }
+
+  .logo {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 5px;
+  }
+
+  .rank {
+    margin-top: 5px;
+    font-size: 1rem;
+  }
+
+  .image-link-form input[type="text"] {
+    padding: 5px;
+    font-size: 0.8rem;
+  }
+
+  .image-link-form button {
+    padding: 5px;
+    font-size: 0.8rem;
   }
 }
