@@ -72,17 +72,6 @@ class App extends Component {
     return boxes;
   }
 
-  calculateTotalFaceArea = (boxes) => {
-    let totalArea = 0;
-    boxes.forEach(box => {
-      const width = Math.abs(box.rightCol - box.leftCol);
-      const height = Math.abs(box.bottomRow - box.topRow);
-      const area = width * height;
-      totalArea += area;
-    });
-    return totalArea;
-  }
-
   displayFaceBoxes = (boxes) => {
     this.setState({boxes: boxes})
   }
