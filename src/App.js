@@ -13,7 +13,7 @@ import './App.css';
 const initialState = {
   input: '',
   imageUrl: '',
-  box: {},
+  boxes: [],
   route: 'signin',
   isSignedIn: false,
   user: {
@@ -40,10 +40,8 @@ class App extends Component {
       joined: data.joined
     }})
   }
-  
 
   componentDidMount() {
-
     // Register event listener here
     document.addEventListener('visibilitychange', this.handleVisibilityChange);
   }
@@ -62,37 +60,37 @@ class App extends Component {
     const image = document.getElementById('inputimage');
     const width = Number(image.width);
     const height = Number(image.height);
-    const aspectRatio = width / height;
     const boxes = regions.map(region => {
       const clarifaiFace = region.region_info.bounding_box;
-      const faceWidth = clarifaiFace.right_col - clarifaiFace.left_col;
-      const faceHeight = clarifaiFace.bottom_row - clarifaiFace.top_row;
-      const scale = aspectRatio > 1 ? width : height;
-      const w = faceWidth * scale;
-      const h = faceHeight * scale;
-      const x = clarifaiFace.left_col * width + (scale - w) / 2;
-      const y = clarifaiFace.top_row * height + (scale - h) / 2;
-        return {
-          leftCol: x,
-          topRow: y,
-          rightCol: x + w,
-          bottomRow: y + h,
-        };
-      });
+      return {
+        leftCol: clarifaiFace.left_col * width,
+        topRow: clarifaiFace.top_row * height,
+        rightCol: width - (clarifaiFace.right_col * width),
+        bottomRow: height - (clarifaiFace.bottom_row * height)
+      }
+    });
     return boxes;
   }
-  
 
-
-  displayFaceBox = (boxes) => {
-    this.setState({box: boxes});
+  calculateTotalFaceArea = (boxes) => {
+    let totalArea = 0;
+    boxes.forEach(box => {
+      const width = Math.abs(box.rightCol - box.leftCol);
+      const height = Math.abs(box.bottomRow - box.topRow);
+      const area = width * height;
+      totalArea += area;
+    });
+    return totalArea;
   }
-  
+
+  displayFaceBoxes = (boxes) => {
+    this.setState({boxes: boxes})
+  }
+
   onInputChange = (event) => {
     this.setState({ input: event.target.value });
   }
   
-   
   onButtonSubmit = () => {
     this.setState({imageUrl: this.state.input})
     const raw = JSON.stringify({
@@ -137,7 +135,7 @@ class App extends Component {
           })
         }
         const box = this.calculateFaceLocation(data);
-        this.setState({ box });
+        this.displayFaceBoxes(box);
       })
       .catch(error => console.log('error:', error));
   }
