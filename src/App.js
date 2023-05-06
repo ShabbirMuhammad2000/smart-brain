@@ -166,7 +166,7 @@ class App extends Component {
             init={this.particlesInit}
             loaded={this.particlesLoaded}
             options={{
-              fpsLimit: 30,
+              fpsLimit: 60,
               animation: {
                 enable: this.state.isAnimating,
               },
@@ -183,82 +183,105 @@ class App extends Component {
                 },
                 modes: {
                   push: {
-                    quantity: 4,
-                  },
-                  repulse: {
-                    distance: 200,
-                    duration: 0.4,
+                    particles_nb: 4,
                   },
                 },
               },
               particles: {
+                number: {
+                  value: 80,
+                  density: {
+                    enable: true,
+                    value_area: 800,
+                  },
+                },
                 color: {
                   value: '#ffffff',
                 },
-                links: {
-                  color: '#ffffff',
-                  distance: 150,
-                  enable: true,
-                  opacity: 0.5,
-                  width: 1,
-                },
-                collisions: {
-                  enable: true,
-                },
-                move: {
-                  directions: 'none',
-                  enable: true,
-                  outModes: {
-                    default: 'bounce',
+                shape: {
+                  type: 'circle',
+                  stroke: {
+                    width: 0,
+                    color: '#000000',
                   },
-                  random: false,
-                  speed: 3,
-                  straight: false,
-                },
-                number: {
-                  density: {
-                    enable: true,
-                    area: 800,
+                  polygon: {
+                    nb_sides: 5,
                   },
-                  value: 80,
+                  image: {
+                    src: 'img/github.svg',
+                    width: 100,
+                    height: 100,
+                  },
                 },
                 opacity: {
                   value: 0.5,
-                },
-                shape: {
-                  type: 'circle',
+                  random: false,
+                  anim: {
+                    enable: false,
+                    speed: 1,
+                    opacity_min: 0.1,
+                    sync: false,
+                  },
                 },
                 size: {
-                  value: { min: 1, max: 5 },
+                  value: 3,
+                  random: true,
+                  anim: {
+                    enable: false,
+                    speed: 40,
+                    size_min: 0.1,
+                    sync: false,
+                  },
+                },
+                line_linked: {
+                  enable: true,
+                  distance: 150,
+                  color: '#ffffff',
+                  opacity: 0.4,
+                  width: 1,
+                },
+                move: {
+                  enable: true,
+                  speed: 4, // set a fixed speed value
+                  direction: 'none',
+                  random: false,
+                  straight: false,
+                  out_mode: 'out',
+                  bounce: false,
+                  attract: {
+                    enable: false,
+                    rotateX: 600,
+                    rotateY: 1200,
+                  },
                 },
               },
               detectRetina: true,
             }}
           />
+    </div>
+      <div className="content">
+        <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange}/>
+        { route === 'home' 
+          ? <div>
+              <Logo />
+              <Rank name={this.state.user.name} entries={this.state.user.entries} />
+              <ImageLinkForm
+                onInputChange={this.onInputChange}
+                onButtonSubmit={this.onButtonSubmit}
+              />
+              <FaceRecognition imageUrl={imageUrl} boxes={boxes} />
+            </div> 
+            : (
+            route === 'signin' 
+            ?<Signin onRouteChange={this.onRouteChange} loadUser={this.loadUser} />
+            :<Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
+            )
+            
+          }
         </div>
-        <div className="content">
-          <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange}/>
-          { route === 'home' 
-            ? <div>
-                <Logo />
-                <Rank name={this.state.user.name} entries={this.state.user.entries} />
-                <ImageLinkForm
-                  onInputChange={this.onInputChange}
-                  onButtonSubmit={this.onButtonSubmit}
-                />
-                <FaceRecognition imageUrl={imageUrl} boxes={boxes} />
-             </div> 
-             : (
-              route === 'signin' 
-              ?<Signin onRouteChange={this.onRouteChange} loadUser={this.loadUser} />
-              :<Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
-             )
-             
-            }
-          </div>
-       </div>
-      );
-    }
+      </div>
+    );
+  }
 } 
 
 export default App;
