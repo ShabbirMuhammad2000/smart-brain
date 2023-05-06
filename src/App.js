@@ -166,7 +166,7 @@ class App extends Component {
             init={this.particlesInit}
             loaded={this.particlesLoaded}
             options={{
-              fpsLimit: 60,
+              fpsLimit: 30,
               animation: {
                 enable: this.state.isAnimating,
               },
