@@ -8,6 +8,7 @@ import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
 import Signin from './components/Signin/Signin';
 import Register from './components/Register/Register';
+import Leaderboard from './components/Leaderboard/leaderboard';
 import './App.css';
 
 const initialState = {
@@ -15,6 +16,7 @@ const initialState = {
   imageUrl: '',
   boxes: [],
   route: 'signin',
+  isLeaderboardVisible: false,
   isSignedIn: false,
   user: {
     id: '',
@@ -140,27 +142,33 @@ class App extends Component {
     await console.log(container);
   };
 
- onRouteChange = (route) => {
+  toggleLeaderboard = () => {
+    this.setState(prevState => ({
+      isLeaderboardVisible: !prevState.isLeaderboardVisible,
+      route: 'leaderboard', // <-- add this line
+    }));
+  };
+  
+  
+
+  onRouteChange = (route) => {
     if (route === 'signout') {
-      this.setState(initialState)
+      this.setState(initialState);
     } else if (route === 'home') {
-      this.setState({isSignedIn: true})
+      this.setState({isSignedIn: true, route: route}); // set route to home
+    } else {
+      this.setState({route: route});
     }
-    this.setState({route: route});
   }
+  
+  
 
   render() {
-    const {isSignedIn, imageUrl, route, boxes} = this.state
+    const {isSignedIn, imageUrl, route, boxes, isLeaderboardVisible} = this.state;
     return (
       <div className="App">
-        <div
-          className="particles-container"
-          style={{
-            background:
-              'linear-gradient(to right, rgb(213, 81, 240), rgb(2, 242, 194))',
-          }}
-        >
-          <Particles
+        <div className="particles-container" style={{background: 'linear-gradient(to right, rgb(213, 81, 240), rgb(2, 242, 194))'}}>
+        <Particles
             className="particles"
             id="tsparticles"
             init={this.particlesInit}
@@ -258,30 +266,46 @@ class App extends Component {
               detectRetina: true,
             }}
           />
-    </div>
-      <div className="content">
-        <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange}/>
-        { route === 'home' 
+        </div>
+        <div className="content">
+        <Navigation
+          isSignedIn={isSignedIn}
+          onRouteChange={this.onRouteChange}
+          toggleLeaderboard={this.toggleLeaderboard}
+          currentRoute={route}
+        />
+        {route === 'home'
           ? <div>
               <Logo />
-              <Rank name={this.state.user.name} entries={this.state.user.entries} />
+              <Rank
+                name={this.state.user.name}
+                entries={this.state.user.entries}
+              />
               <ImageLinkForm
                 onInputChange={this.onInputChange}
                 onButtonSubmit={this.onButtonSubmit}
               />
-              <FaceRecognition imageUrl={imageUrl} boxes={boxes} />
-            </div> 
+              <FaceRecognition
+                imageUrl={imageUrl}
+                boxes={boxes}
+              />
+            </div>
+          : (
+            route === 'signin'
+            ? <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
             : (
-            route === 'signin' 
-            ?<Signin onRouteChange={this.onRouteChange} loadUser={this.loadUser} />
-            :<Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
+              route === 'register'
+              ? <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
+              : <Leaderboard isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} />
+
             )
-            
-          }
-        </div>
+          )
+        }
       </div>
-    );
-  }
+    </div>
+  );
+}
+  
 } 
 
 export default App;
