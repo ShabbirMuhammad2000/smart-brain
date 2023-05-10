@@ -5,12 +5,27 @@ const Navigation = ({ isSignedIn, onRouteChange, route }) => {
     return (
       <nav style={{ display: "flex", justifyContent: "flex-end" }}>
         {route === "leaderboard" ? (
-          <p className="f3 link dim black underline pa3 pointer" onClick={() => onRouteChange("home")}>
+          <p className="f3 link dim black underline pa3 pointer">
+            Leaderboard
+          </p>
+        ) : (
+          <p
+            className="f3 link dim black underline pa3 pointer"
+            onClick={() => onRouteChange("leaderboard")}
+          >
+            Leaderboard
+          </p>
+        )}
+        {route === "home" ? (
+          <p className="f3 link dim black underline pa3 pointer">
             Home
           </p>
         ) : (
-          <p className="f3 link dim black underline pa3 pointer" onClick={() => onRouteChange("leaderboard")}>
-            Leaderboard
+          <p
+            className="f3 link dim black underline pa3 pointer"
+            onClick={() => onRouteChange("home")}
+          >
+            Home
           </p>
         )}
         <p
@@ -42,4 +57,3 @@ const Navigation = ({ isSignedIn, onRouteChange, route }) => {
 };
 
 export default Navigation;
-
