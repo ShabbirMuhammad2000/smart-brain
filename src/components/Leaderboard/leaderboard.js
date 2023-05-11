@@ -27,6 +27,7 @@ class Leaderboard extends React.Component {
           isSignedIn={true}
           onRouteChange={this.onRouteChange}
           route="leaderboard"
+          navClass="leaderboard-nav"
         />
         <h1>Leaderboard</h1>
         <table>
@@ -53,7 +54,5 @@ class Leaderboard extends React.Component {
     );
   }
 }
-
-
 
 export default Leaderboard;

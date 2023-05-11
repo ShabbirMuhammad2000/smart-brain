@@ -3,6 +3,16 @@
   justify-content: center;
 }
 
+.leaderboard-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  position: relative;
+}
+
 h1 {
   text-align: center;
   font-size: 48px;
@@ -13,10 +23,12 @@ h1 {
 table {
   border-collapse: collapse;
   border: 2px solid black;
-  width: 60%;
+  width: 100%;
+  max-width: 800px; /* set a maximum width for the table */
   margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
+  overflow-x: auto; /* add horizontal scrolling when needed */
 }
 
 th,
@@ -26,6 +38,7 @@ td {
   border-bottom: 2px solid black;
   font-size: 28px;
   font-weight: bold;
+  white-space: nowrap; /* prevent table cells from wrapping */
 }
 
 th.entries,
@@ -42,7 +55,6 @@ td.rank {
   font-size: 28px;
   font-weight: bold;
 }
-
 
 th.name,
 td.name {
@@ -64,4 +76,10 @@ td.joined {
 
 td.rank {
   font-size: 28px;
+}
+
+@media only screen and (max-width: 600px) {
+  table {
+    font-size: 16px; /* decrease font size for smaller screens */
+  }
 }
