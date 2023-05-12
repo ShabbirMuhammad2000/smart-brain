@@ -39,7 +39,7 @@ class Leaderboard extends React.Component {
               <th className="Date">Joined Date</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody style={{ maxHeight: "500px", overflowY: "auto" }}>
             {leaderboardData.map((item, index) => (
               <tr key={item.name}>
                 <td className="rank">{index + 1}</td>

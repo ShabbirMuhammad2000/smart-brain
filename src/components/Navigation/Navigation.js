@@ -1,9 +1,9 @@
 import React from "react";
 
-const Navigation = ({ isSignedIn, onRouteChange, route }) => {
+const Navigation = ({ isSignedIn, onRouteChange, route, navClass }) => {
   if (isSignedIn) {
     return (
-      <nav style={{ display: "flex", justifyContent: "flex-end" }}>
+      <nav className={navClass} style={{ display: "flex", justifyContent: "flex-end" }}>
         {route === "leaderboard" ? (
           <p className="f3 link dim black underline pa3 pointer">
             Leaderboard
