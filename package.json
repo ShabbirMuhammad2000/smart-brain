@@ -10,6 +10,7 @@
     "cors": "^2.8.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-helmet": "^6.1.0",
     "react-parallax-tilt": "^1.7.118",
     "react-particles": "^2.9.3",
     "react-router-dom": "^6.11.1",

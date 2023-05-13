@@ -9,6 +9,7 @@ import Rank from './components/Rank/Rank';
 import Signin from './components/Signin/Signin';
 import Register from './components/Register/Register';
 import Leaderboard from './components/Leaderboard/leaderboard';
+import Instructions from './components/Instructions/instructions';
 import './App.css';
 
 const initialState = {
@@ -151,16 +152,17 @@ class App extends Component {
   
   
 
-    onRouteChange = (route) => {
+  onRouteChange = (route) => {
     if (route === 'signout') {
       this.setState(initialState);
     } else if (route === 'home') {
-      this.setState({isSignedIn: true, route: route}); // set route to home
+      this.setState({isSignedIn: true, route: route});
+    } else if (route === 'instructions') { // add instructions route
+      this.setState({route: route});
     } else {
       this.setState({route: route});
     }
   }
-  
   
   render() {
     const { isSignedIn, imageUrl, route, boxes, isLeaderboardVisible } = this.state;
@@ -302,16 +304,16 @@ class App extends Component {
             : (
               route === 'register'
               ? <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
-              : <Leaderboard isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} />
-
-            )
-          )
-        }
+              : (route === 'instructions') // add instructions route
+                ? <Instructions onRouteChange={this.onRouteChange} />
+                : <Leaderboard isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} />
+             )
+           )
+         }
+        </div>
       </div>
-    </div>
-  );
-}
-  
+    );
+  }
 } 
 
 export default App;

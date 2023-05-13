@@ -1,0 +1,17 @@
+.nav-links {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+}
+
+.nav-auth{
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+}
+@media screen and (max-width: 500px) {
+  .nav-links {
+    justify-content: space-between;
+    font-size: 2px;
+  }
+}
