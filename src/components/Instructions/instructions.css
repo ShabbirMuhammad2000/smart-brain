@@ -1,7 +1,7 @@
 .instructions-container {
   width: 800px;
   margin: 0 auto;
-  margin-top: 200px;
+  margin-top: 400px;
   padding: 20px;
   text-align: center;
 }
@@ -12,9 +12,9 @@
 }
 
 .instructions-container p {
-  font-size: 18px;
+  font-size: 25px;
   line-height: 1.5;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .instructions-container ol {
@@ -30,6 +30,17 @@
   margin-top: 20px;
   width: 100%;
 }
+
+.instructions-nav {
+  width: 175%;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+  text-align: right;
+  margin-bottom: 5.5%;
+}
+
+
 
 /* Mobile styles */
 @media only screen and (max-width: 600px) and (max-height: 600px) {
@@ -56,4 +67,15 @@
     margin-top: 10px;
     height: 200px;
   }
+
+  .instructions-nav {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+    text-align: center;
+    margin-bottom: 5.5%;
+  }
+  
+
 }
